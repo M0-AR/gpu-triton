@@ -9,7 +9,7 @@
 [![docker](https://img.shields.io/badge/Docker-ready-2496ED?logo=docker&logoColor=white)](docker-compose.yml)
 [![data](https://img.shields.io/badge/data-live%20BTC%20%2B%20AAPL-orange)](data/)
 
-**Quick Start · [Beginner Guide](#-beginner-guide--read-this-and-you-are-a-professional) · [Live Demo Page](preview.html) · [Results](#-measured-results-rtx-3090-2026-10-07) · [Paper Draft](PAPER.md)**
+**🌐 [Live Site](https://m0-ar.github.io/gpu-triton/preview.html) · Quick Start · [Beginner Guide](#-beginner-guide--read-this-and-you-are-a-professional) · [Local Demo Page](preview.html) · [Results](#-measured-results-rtx-3090-2026-10-07) · [Paper Draft](PAPER.md)**
 
 </div>
 
@@ -32,7 +32,15 @@ Someone taught millions of people how GPUs work with beautiful animations: one l
 
 *At 1M elements both hit **722.8 GB/s** — to the decimal. The animation is rendered from `results/summary.json` by `scripts/make_charts.py`.*
 
-**🌐 Prefer the web version?** Open [**`preview.html`**](preview.html) — the interactive report with all four charts, a step-by-step worked example, and a self-grading quiz. Publish it free with GitHub Pages ([how-to](#-github-pages--your-repo-as-a-website)).
+**🌐 Prefer the web version?** The interactive report is live — every path below renders correctly in the browser (mirrors included, so it survives either Pages source setting):
+
+| Page | Live link |
+|---|---|
+| 🏠 Site entry (auto-redirects to the report) | https://m0-ar.github.io/gpu-triton/ |
+| 📄 Interactive report | https://m0-ar.github.io/gpu-triton/preview.html |
+| 📄 Mirror under `/docs` | https://m0-ar.github.io/gpu-triton/docs/preview.html |
+
+No server here? Open [`preview.html`](preview.html) locally — same charts, same worked example, same self-grading quiz. Publishing is free via GitHub Pages ([how-to](#-github-pages--your-repo-as-a-website)).
 
 ![Interactive report screenshot](docs/preview-screenshot.png)
 
@@ -255,14 +263,22 @@ Anyone clicking your Pages link should see `preview.html` as a real website. Set
 1. Push this repo to GitHub.
 2. Open **Settings → Pages**.
 3. Under **Build and deployment → Source**, choose **Deploy from a branch**.
-4. Select branch **`main`** (or `master`) and folder **`/ (root)`**, then **Save**.
-5. After ~1 minute your page is live at:
-   `https://<your-username>.github.io/<your-repo>/preview.html`
-6. Put that URL in the repo's **About → Website** field so it shows under the repo title.
+4. Select branch **`main`** and folder **`/ (root)`** (recommended: our entry `index.html`, canonical `preview.html`, and `docs/` assets all resolve under root), then **Save**.
+5. Wait 1–2 minutes, then confirm the **Actions → "pages build and deployment"** run is green.
+6. These three probes must all return `200` (a green deployment alone never proves *your path* exists — probe it):
 
-Why root and not `/docs`? Our charts and demo GIF live under `docs/`, and
-`preview.html` references them with relative paths (`docs/charts/…`), which
-work from any published folder. No build step, no dependencies, works offline.
+```bash
+BASE="https://m0-ar.github.io/gpu-triton"
+for p in "" "preview.html" "docs/preview.html"; do
+  printf "%s -> " "/$p"
+  curl -s -o /dev/null -w "%{http_code}\n" "$BASE/$p"
+done
+# expect: / -> 200, /preview.html -> 200, /docs/preview.html -> 200
+```
+
+7. Put `https://m0-ar.github.io/gpu-triton/preview.html` in the repo's **About → Website** field so it shows under the repo title.
+
+Why it can't 404: the repo ships mirrors for both source settings — root `index.html` (redirects to `preview.html`), root `preview.html` (canonical, assets under `docs/…`), `docs/preview.html` (same page, rewritten asset paths), `docs/index.html` (redirect), plus `.nojekyll` in both folders so files serve exactly as committed. Asset paths are relative, so project Pages (served under `/gpu-triton/`) resolve correctly.
 
 ## 🗂️ Project structure
 
