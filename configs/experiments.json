@@ -1,0 +1,12 @@
+{
+  "sizes": [4096, 65536, 1048576, 16777216],
+  "block_sizes": [256, 1024, 2048],
+  "dtypes": ["float32"],
+  "repeats": 30,
+  "device": "cuda",
+  "seed": 0,
+  "attention_lengths": [1024, 4096, 16384, 32768],
+  "attention_heads": 32,
+  "attention_bytes_per_score": 2,
+  "note": "Edit + rerun `python3 -m src.bench.run_all`. Results land in results/."
+}

@@ -1,0 +1,8 @@
+# Pinned 2026-10-07. Verified against torch 2.13 / triton 3.7.1 on RTX 3090.
+torch>=2.4,<3
+triton>=3.0,<4
+numpy>=1.26
+pandas>=2.0
+matplotlib>=3.8
+pytest>=8.0
+requests>=2.31

@@ -1,0 +1,21 @@
+services:
+  bench:
+    build: .
+    image: gpu-triton-lecture1:2026
+    runtime: nvidia
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - PYTHONPATH=/work
+    volumes:
+      - ./results:/work/results
+      - ./data:/work/data
+    working_dir: /work
+    # Reproduce everything end-to-end (tests + all benchmarks):
+    command: ["bash", "-lc", "pytest -q && python3 -m src.bench.run_all"]

@@ -1,0 +1,315 @@
+{
+  "vector_add": {
+    "device": "cuda",
+    "rows": [
+      {
+        "n": 4096,
+        "torch_ms": 0.0030720001086592674,
+        "torch_gbps": 15.99999943406634,
+        "variants": [
+          {
+            "block": 256,
+            "ms": 0.003263999940827489,
+            "gbps": 15.058823802410668,
+            "max_err": 0.0
+          },
+          {
+            "block": 1024,
+            "ms": 0.0030720001086592674,
+            "gbps": 15.99999943406634,
+            "max_err": 0.0
+          },
+          {
+            "block": 2048,
+            "ms": 0.004095999989658594,
+            "gbps": 12.000000030297088,
+            "max_err": 0.0
+          }
+        ],
+        "status": "ok"
+      },
+      {
+        "n": 65536,
+        "torch_ms": 0.0037120000924915075,
+        "torch_gbps": 211.86206368657287,
+        "variants": [
+          {
+            "block": 256,
+            "ms": 0.004095999989658594,
+            "gbps": 192.0000004847534,
+            "max_err": 0.0
+          },
+          {
+            "block": 1024,
+            "ms": 0.0037120000924915075,
+            "gbps": 211.86206368657287,
+            "max_err": 0.0
+          },
+          {
+            "block": 2048,
+            "ms": 0.0031999999191612005,
+            "gbps": 245.76000620841998,
+            "max_err": 0.0
+          }
+        ],
+        "status": "ok"
+      },
+      {
+        "n": 1048576,
+        "torch_ms": 0.01740800030529499,
+        "torch_gbps": 722.8235167351564,
+        "variants": [
+          {
+            "block": 256,
+            "ms": 0.01759999990463257,
+            "gbps": 714.9381856921489,
+            "max_err": 0.0
+          },
+          {
+            "block": 1024,
+            "ms": 0.045184001326560974,
+            "gbps": 278.4815782263015,
+            "max_err": 0.0
+          },
+          {
+            "block": 2048,
+            "ms": 0.01740800030529499,
+            "gbps": 722.8235167351564,
+            "max_err": 0.0
+          }
+        ],
+        "status": "ok"
+      },
+      {
+        "n": 16777216,
+        "torch_ms": 0.24063999950885773,
+        "torch_gbps": 836.6297889415902,
+        "variants": [],
+        "status": "skipped_oom_shared_gpu"
+      }
+    ]
+  },
+  "fusion": {
+    "device": "cuda",
+    "rows": [
+      {
+        "n": 4096,
+        "unfused_ms": 0.006144000217318535,
+        "unfused_gbps": 13.333332861721948,
+        "fused_ms": 0.004095999989658594,
+        "fused_gbps": 12.000000030297088,
+        "speedup": 1.500000056843419,
+        "max_err": 0.0,
+        "status": "ok"
+      },
+      {
+        "n": 65536,
+        "unfused_ms": 0.012000000104308128,
+        "unfused_gbps": 109.22666571723092,
+        "fused_ms": 0.016383999958634377,
+        "fused_gbps": 48.00000012118835,
+        "speedup": 0.7324218832156504,
+        "max_err": 0.0,
+        "status": "ok"
+      },
+      {
+        "n": 1048576,
+        "unfused_ms": 0.025728000327944756,
+        "unfused_gbps": 815.1243677193812,
+        "fused_ms": 0.01740800030529499,
+        "fused_gbps": 722.8235167351564,
+        "speedup": 1.4779411693897473,
+        "max_err": 0.0,
+        "status": "ok"
+      },
+      {
+        "n": 16777216,
+        "unfused_ms": 0.40195199847221375,
+        "unfused_gbps": 834.7870424214238,
+        "fused_ms": 0.2396160066127777,
+        "fused_gbps": 840.205105017655,
+        "speedup": 1.6774839216888082,
+        "max_err": 0.0,
+        "status": "ok"
+      }
+    ]
+  },
+  "roofline": {
+    "gpu": "NVIDIA GeForce RTX 3090",
+    "measured_bw_GBs": 836.6297889415902,
+    "peak_tflops": 35.6,
+    "ridge_flop_per_byte": 42.55167634544439,
+    "vector_add_ai": 0.08333333333333333,
+    "vector_add_attainable_tflops": 0.06971914907846585,
+    "bound": "memory-bound",
+    "lecture_h100_ridge": 20.0,
+    "lecture_h100_attainable_tflops": 0.28
+  },
+  "waves": {
+    "lecture_toy": {
+      "blocks": 20,
+      "slots": 8,
+      "waves": 3,
+      "last_wave_fill": 4,
+      "last_wave_util": 0.5,
+      "wasted_slots": 4
+    },
+    "rtx3090_grids": [
+      {
+        "blocks": 164,
+        "blocks_per_sm": 1,
+        "slots": 82,
+        "waves": 2,
+        "last_wave_fill": 82,
+        "last_wave_util": 1.0,
+        "wasted_slots": 0
+      },
+      {
+        "blocks": 164,
+        "blocks_per_sm": 2,
+        "slots": 164,
+        "waves": 1,
+        "last_wave_fill": 164,
+        "last_wave_util": 1.0,
+        "wasted_slots": 0
+      },
+      {
+        "blocks": 164,
+        "blocks_per_sm": 4,
+        "slots": 328,
+        "waves": 1,
+        "last_wave_fill": 164,
+        "last_wave_util": 0.5,
+        "wasted_slots": 164
+      },
+      {
+        "blocks": 656,
+        "blocks_per_sm": 1,
+        "slots": 82,
+        "waves": 8,
+        "last_wave_fill": 82,
+        "last_wave_util": 1.0,
+        "wasted_slots": 0
+      },
+      {
+        "blocks": 656,
+        "blocks_per_sm": 2,
+        "slots": 164,
+        "waves": 4,
+        "last_wave_fill": 164,
+        "last_wave_util": 1.0,
+        "wasted_slots": 0
+      },
+      {
+        "blocks": 656,
+        "blocks_per_sm": 4,
+        "slots": 328,
+        "waves": 2,
+        "last_wave_fill": 328,
+        "last_wave_util": 1.0,
+        "wasted_slots": 0
+      },
+      {
+        "blocks": 1312,
+        "blocks_per_sm": 1,
+        "slots": 82,
+        "waves": 16,
+        "last_wave_fill": 82,
+        "last_wave_util": 1.0,
+        "wasted_slots": 0
+      },
+      {
+        "blocks": 1312,
+        "blocks_per_sm": 2,
+        "slots": 164,
+        "waves": 8,
+        "last_wave_fill": 164,
+        "last_wave_util": 1.0,
+        "wasted_slots": 0
+      },
+      {
+        "blocks": 1312,
+        "blocks_per_sm": 4,
+        "slots": 328,
+        "waves": 4,
+        "last_wave_fill": 328,
+        "last_wave_util": 1.0,
+        "wasted_slots": 0
+      },
+      {
+        "blocks": 1353,
+        "blocks_per_sm": 1,
+        "slots": 82,
+        "waves": 17,
+        "last_wave_fill": 41,
+        "last_wave_util": 0.5,
+        "wasted_slots": 41
+      },
+      {
+        "blocks": 1353,
+        "blocks_per_sm": 2,
+        "slots": 164,
+        "waves": 9,
+        "last_wave_fill": 41,
+        "last_wave_util": 0.25,
+        "wasted_slots": 123
+      },
+      {
+        "blocks": 1353,
+        "blocks_per_sm": 4,
+        "slots": 328,
+        "waves": 5,
+        "last_wave_fill": 41,
+        "last_wave_util": 0.125,
+        "wasted_slots": 287
+      }
+    ]
+  },
+  "attention": {
+    "rows": [
+      {
+        "n": 1024,
+        "std_GiB": 0.0625,
+        "flash_KiB": 2048.0,
+        "traffic_GiB": 0.25
+      },
+      {
+        "n": 4096,
+        "std_GiB": 1.0,
+        "flash_KiB": 2048.0,
+        "traffic_GiB": 4.0
+      },
+      {
+        "n": 16384,
+        "std_GiB": 16.0,
+        "flash_KiB": 2048.0,
+        "traffic_GiB": 64.0
+      },
+      {
+        "n": 32768,
+        "std_GiB": 64.0,
+        "flash_KiB": 2048.0,
+        "traffic_GiB": 256.0
+      }
+    ],
+    "online_softmax_max_err": 1.1920928955078125e-07,
+    "lecture_claim": "10x tokens -> 100x scores; 32k tokens ~ most of 80 GB"
+  },
+  "market": {
+    "device": "cuda",
+    "stats": {
+      "btc_n": 31,
+      "btc_min": 75622.796875,
+      "btc_max": 86421.953125,
+      "btc_last": 83313.796875,
+      "aapl_current": 337.27,
+      "tiled_n": 992
+    },
+    "triton": {
+      "add_max_err": 0.0,
+      "fused_max_err": 0.0
+    },
+    "torch_add_sum": 81381816.0,
+    "torch_fused_sum": 1627041.75
+  }
+}
